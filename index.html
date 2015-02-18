@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div id="app-container">
+  </div>
+
+  <script type="text/template" data-template-name="new-post">
+    <!-- .js-new-post <form> -->
+    <input class="new-title" type="text" placeholder="Type Your Title Here" >
+    <input class="new-body" type="text" placeholder="Type Your Body Here" >
+    <input type="submit"> 
+  </script>
+
+  <script type="text/template" data-template-name="post-list">
+    <!-- .js-post-listing <li> within .js-post-list <ul> -->
+    <h2><a href="#posts/<%= _id %>"><span class="wrapper-title"><%= title %></span></a></h2> -- <h4><%= author %></h4><a class="edit" href="#">(+)</a><a class="destroy" href="#">(X)</a>  
+  </script>
+
+  <script type="text/template" data-template-name="post-full">
+    <!-- .js-post-full -->
+    <h2><span class="wrapper-title"><%= title %></span></h2>
+    <h4><%= author %></h4>
+    <p><%= body %></p>
+    <h4>Last updated: <%= updatedAt %></h4>
+    <h4><a href="#"><--</a></h4>
+  </script>
+
+
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+  <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
