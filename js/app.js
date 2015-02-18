@@ -5,6 +5,32 @@ var $container = $('#app-container'),
 
 var REMOTE_SERVER = "http://tiny-pizza-server.herokuapp.com/collections/atmbackbone";
 
+//HELPER METHODS
+
+var toggleEdit = function(selector, modelProp, context) {
+    if (context.$(selector).attr('contenteditable')) {
+      context.$(selector).removeAttr('contenteditable');
+      context.model.set(modelProp, context.$(selector).text());
+      context.model.set('updatedAt', new Date().toString());
+      context.model.save();
+    } else {
+      context.$(selector).attr('contenteditable', true);
+      context.$(selector).focus();
+    }
+};
+
+var toggleEditButton = function($button) {
+  if ($button.hasClass('octicon-pencil')) { 
+    $button.removeClass('octicon-pencil');
+    $button.addClass('octicon-check');
+  } else {
+    $button.removeClass('octicon-check');
+    $button.addClass('octicon-pencil');
+  }
+};
+
+
+//BACKBONE BEGINS
 var PostModel = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: function(options) {
@@ -26,26 +52,35 @@ var PostCollection = Backbone.Collection.extend({
 
 
 var PostViewFull = Backbone.View.extend({
- className: 'js-post-full',
- template: _.template($templatePostFull),
- events: {
-   'click .close' : 'closeMe',
-   'click .edit' : 'editMe'
- },
- closeMe: function(e) {},
- editMe: function(e) {},
- render: function() {
-  this.$el.html( this.template (this.model.toJSON() ) );
-  return this;
- }
-
+  className: 'js-post-full',
+  template: _.template($templatePostFull),
+  events: {
+    'click .js-destroy' : 'destroyMe',
+    'click .js-edit' : 'editMe'
+  },
+  destroyMe: function(e) {
+    e.preventDefault();
+    this.model.destroy().done(function() {
+      AppRouter.navigate("/", {trigger: true});
+    });
+  },
+  editMe: function(e) {
+    e.preventDefault();
+    toggleEditButton(this.$('.js-edit'));
+    toggleEdit('.wrapper-body', 'body', this);
+    toggleEdit('.wrapper-title', 'title', this);
+  },
+  render: function() {
+    this.$el.html( this.template (this.model.toJSON() ) );
+    return this;
+  }
 });
 
 var PostViewList = Backbone.View.extend({
   tagName: 'ul',
   className: 'js-post-list',
   initialize: function() {
-    this.listenTo(this.collection, 'add sync destroy', this.render);
+    this.listenTo(this.collection, 'sync destroy', this.render);
   },
   render: function() {
     this.$el.empty();
@@ -64,8 +99,8 @@ var PostViewListing = Backbone.View.extend({
   className: 'js-post-listing',
   template: _.template($templatePostListing),
   events: {
-    'click .destroy':'destroyMe',
-    'click .edit':'editMe'
+    'click .js-destroy':'destroyMe',
+    'click .js-edit':'editMe'
   },
   destroyMe: function(e) {
     e.preventDefault();
@@ -73,14 +108,8 @@ var PostViewListing = Backbone.View.extend({
   },
   editMe: function(e) {
     e.preventDefault();
-    if (this.$('.wrapper-title').attr('contenteditable')) {
-      this.$('.wrapper-title').attr('contenteditable', false);
-      
-      this.model.set('title', this.$('.wrapper-title').text());
-      this.model.save();
-    } else {
-      this.$('.wrapper-title').attr('contenteditable', true);
-    }
+    toggleEditButton(this.$('.js-edit'));
+    toggleEdit('.wrapper-title', 'title', this);
   },
   render: function() {
     this.$el.html( this.template(this.model.toJSON() ) );

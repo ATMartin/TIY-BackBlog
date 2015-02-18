@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link rel="stylesheet" href="bower_components/octicons/octicons/octicons.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -11,23 +12,28 @@
 
   <script type="text/template" data-template-name="new-post">
     <!-- .js-new-post <form> -->
-    <input class="new-title" type="text" placeholder="Type Your Title Here" >
-    <input class="new-body" type="text" placeholder="Type Your Body Here" >
-    <input type="submit"> 
+    <label>New Microblog: </label>
+    <input class="new-title" type="text" placeholder="-title-" >
+    <input class="new-body" type="text" placeholder="-body-" >
+    <input type="submit" value="Share"> 
   </script>
 
   <script type="text/template" data-template-name="post-list">
     <!-- .js-post-listing <li> within .js-post-list <ul> -->
-    <h2><a href="#posts/<%= _id %>"><span class="wrapper-title"><%= title %></span></a></h2> -- <h4><%= author %></h4><a class="edit" href="#">(+)</a><a class="destroy" href="#">(X)</a>  
+    <h2><a href="#posts/<%= _id %>"><span class="wrapper-title"><%- title %></span></a></h2>&nbsp; <h4><span class="wrapper-author">-- by <%- author %></span></h4><a class="button js-edit edit octicon octicon-pencil" href="#"></a><a class="button js-destroy destroy octicon octicon-trashcan" href="#"></a>  
   </script>
 
   <script type="text/template" data-template-name="post-full">
     <!-- .js-post-full -->
-    <h2><span class="wrapper-title"><%= title %></span></h2>
-    <h4><%= author %></h4>
-    <p><%= body %></p>
-    <h4>Last updated: <%= updatedAt %></h4>
-    <h4><a href="#"><--</a></h4>
+    <h2><span class="wrapper-title"><%- title %></span></h2>
+    <h4><%- author %></h4>
+    <p><span class="wrapper-body"><%- body %></span></p>
+    <h4>Last updated: <%- updatedAt %></h4>
+    <h4>
+      <a href="#" class="button back octicon octicon-arrow-left"></a>
+      <a href="#" class="button js-edit edit octicon octicon-pencil"></a>
+      <a href="#" class="button js-destroy destroy octicon octicon-trashcan"></a>
+    </h4>
   </script>
 
 

@@ -10,16 +10,20 @@ html, body {
 body {
   height: 100%;
   width: 100%;
+  background: url("https://ununsplash.imgix.net/uploads/141202616623001715bb7/c1b3b9b0?q=75&fm=jpg&s=07faf9fb6409579bda59881970b284d1");
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 #app-container {
   position: absolute;
   height: 90%;
   width: 70%;
-  border: 2px solid black;
+  min-width: 450px;
+  border: 1px solid gray;
   border-bottom: none;
+  background: rgba(255, 255, 255, 0.8);
   bottom: 0;
-  margin-left: 15%;
+  margin: 0 15%;
   text-align: center;
   -webkit-transition: all ease 0.5s;
           transition: all ease 0.5s;
@@ -41,32 +45,35 @@ body {
   overflow: scroll;
 }
 .js-post-list .js-post-listing {
+  line-height: 45px;
+  background: white;
   position: relative;
   height: 50px;
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid gray;
   -webkit-transition: all ease 0.5s;
           transition: all ease 0.5s;
+}
+.js-post-list .js-post-listing .wrapper-author {
+  color: #aaa;
+  font-style: italic;
+}
+.js-post-list .js-post-listing a {
+  color: black;
+  -webkit-transition: all ease 0.2s;
+          transition: all ease 0.2s;
+}
+.js-post-list .js-post-listing a:hover span {
+  color: #fff;
 }
 .js-post-list .js-post-listing * {
   display: inline-block;
 }
-.js-post-list .js-post-listing a.destroy {
-  text-decoration: none;
-  background-color: #d00;
-  border: 2px solid black;
-  border-radius: 25%;
-  margin: 0 5px;
-}
-.js-post-list .js-post-listing a.edit {
-  text-decoration: none;
-  background-color: #dd0;
-  border: 2px solid black;
-  border-radius: 25%;
-  margin: 0 5px;
-}
 .js-post-list .js-post-listing:hover {
   background-color: #ddd;
+}
+.js-post-list .js-post-listing h2, .js-post-list .js-post-listing h4 {
+  margin: 0;
 }
 
 .js-new-post {
@@ -75,4 +82,51 @@ body {
   height: 10%;
   width: 100%;
   padding-top: 2%;
+  background: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+}
+.js-new-post input {
+  border: 1px solid #ccc;
+  height: 30px;
+  font-size: 14px;
+  outline: none;
+  -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
+}
+.js-new-post input:focus {
+  background: #ffc;
+}
+.js-new-post input.new-title {
+  min-width: 20px;
+  max-width: 100px;
+}
+.js-new-post input.new-body {
+  min-width: 100px;
+  max-width: 300px;
+}
+
+a.button {
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 25%;
+  margin: 0 5px;
+  padding: 5px;
+}
+a.button.destroy {
+  background-color: #faa;
+}
+a.button.edit {
+  background-color: #ffa;
+}
+a.button.back {
+  background-color: #afa;
+}
+
+span {
+  -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
+}
+span[contenteditable=true] {
+  background-color: #ffc;
 }

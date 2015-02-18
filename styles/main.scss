@@ -5,16 +5,20 @@ html, body { margin: 0; padding: 0; }
 body {
   height: 100%;
   width: 100%;
+  background: url('https://ununsplash.imgix.net/uploads/141202616623001715bb7/c1b3b9b0?q=75&fm=jpg&s=07faf9fb6409579bda59881970b284d1');
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 #app-container {
   position: absolute;
   height: 90%; 
   width: 70%;
-  border: 2px solid black;
+  min-width: 450px;
+  border: 1px solid gray;
   border-bottom: none;
+  background: rgba(255, 255, 255, 0.8);
   bottom: 0;
-  margin-left: 15%;
+  margin: 0 15%;
   text-align: center;
   transition: all ease 0.5s;
 }
@@ -34,29 +38,25 @@ body {
   padding: 0;
   overflow: scroll;
   .js-post-listing {
+    line-height: 45px;
+    background: rgba(255, 255, 255, 1);
     position: relative;
     height: 50px;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid gray;
     transition: all ease 0.5s;
+    .wrapper-author {
+      color: #aaa; 
+      font-style: italic; 
+    }
+    a { 
+      color: black;
+      transition: all ease 0.2s;
+      &:hover span { color: #fff; }
+    }
     * { display: inline-block; }
-    a.destroy {
-      text-decoration: none;
-      background-color: #d00;
-      border: 2px solid black;
-      border-radius: 25%;
-      margin: 0 5px;
-    }
-    a.edit {
-      text-decoration: none;
-      background-color: #dd0; 
-      border: 2px solid black;
-      border-radius: 25%;
-      margin: 0 5px;
-    }
-    &:hover {
-      background-color: #ddd
-    }
+     &:hover { background-color: #ddd; }
+    h2, h4 { margin: 0; }
   }
 }
 
@@ -66,4 +66,35 @@ body {
   height: 10%;
   width: 100%;
   padding-top: 2%;
+  background: linear-gradient( transparent, rgba(0,0,0,0.7));
+  input { 
+    border: 1px solid #ccc;
+    height: 30px;
+    font-size: 14px;
+    outline: none;
+    transition: all ease 0.5s; 
+    &:focus { background: #ffc; } 
+    &.new-title { min-width: 20px; max-width: 100px; }
+    &.new-body { min-width: 100px; max-width: 300px; }
+  }
+}
+
+
+a.button {
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 25%;
+  margin: 0 5px;
+  padding: 5px;
+  &.destroy { background-color: #faa;  }
+  &.edit    { background-color: #ffa; }
+  &.back    { background-color: #afa; }
+}
+
+span {
+  transition: all ease 0.5s;
+  &[contenteditable=true] {
+    background-color: #ffc;
+  }
 }
